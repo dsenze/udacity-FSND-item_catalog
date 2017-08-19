@@ -1,0 +1,15 @@
+<html>
+
+<head>
+</head>
+
+<body>
+
+    <h1>{{category.name}} - {{subcategory.name}} - {{itemcategory.name}} - {{item.name}}</h1>
+
+    <h3>{{item.name}} - {{item.id}} - {{item.picture}}</h3>
+    <img src="static/images/{{ item.picture }}" alt={{ item.name }} width="25" height="25" />
+	<a href='{{url_for('editItem',itemid = item.id)}}'> edit item</a>
+</body>
+
+</html>

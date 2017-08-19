@@ -1,0 +1,17 @@
+<head>
+</head>
+
+<body>
+
+    <h1>{{category.name}}</h1>
+    {% for i in subcategory %}
+    <p>{{i.name}}</p>
+    <div name="Category Item">
+        <a href='{{url_for('showItemCategory', itemcategoryid = i.id)}}'><img src="static/images/{{ i.picture }}" alt={{ i.name }} width="25" height="25" /></a>
+    </div>
+    {% endfor %}
+	<a href='{{url_for('editCategory',categoryid = category.id)}}'> edit category</a>
+
+</body>
+
+</html>

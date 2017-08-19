@@ -1,0 +1,48 @@
+<html>
+
+<head>
+</head>
+
+<body>
+
+    <h1> Edit Item </h1>
+
+    <form action="{{ url_for('editItem',itemid = item.id)}}" method='post'>
+
+        <dl>
+            <dt>Name: {{item.id}}</dt>
+            <dd><input type='text' size='30' name='name' placeholder='{{item.name}}'></dd>
+            <dt>Description:</dt>
+            <dd><textarea name='description' rows='5' cols='40' placeholder='{{item.description}}'></textarea></dd>
+            <dt>Price:</dt>
+            <dd><input type='text' size='8' name='price' placeholder='{{item.price}}'></dd>
+			<dt>picture</dt>
+			<dd><input type='text' size='8' name='picture' placeholder='{{item.picture}}'></dd>
+			
+			<select name ="category">
+			{% for x in category %}
+				<option value="{{ x.id }}">{{ x.name }}</option>
+			{% endfor %}
+			</select>
+			<select name = "subcategory">
+			{% for x in subcategory %}
+				<option value="{{ x.id }}">{{ x.name }}</option>
+			{% endfor %}
+			</select>
+			<select name = "itemcategory">
+			{% for x in itemcategory %}
+				<option value="{{ x.id }}">{{ x.name }}</option>
+			{% endfor %}
+			</select>
+
+
+        </dl>
+
+
+        <input type='submit' value='Edit'>
+
+        <a href='{{url_for('showItems', itemcategoryid = item.itemcategoryid)}}'> Cancel </a>
+    </form>
+</body>
+
+</html>

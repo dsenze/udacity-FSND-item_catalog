@@ -1,0 +1,35 @@
+<head>
+	</head>
+<body>
+
+<h1>New SubCategory</h1>
+
+    <div class="container">
+      <div class="header">
+	  <dl>
+        <h3 class="text-muted">Upload a picture</h3>
+      </div>
+      <hr/>
+      <div>
+      
+     <form action="{{ url_for('addSubCategory')}}" method = 'post' enctype="multipart/form-data">
+	 	<dt>SubCategory Name:</dt>
+		<dd><input type ='text' size='30' name='name'></dd>
+		<d1>
+		<select name ="category" id="category">
+			{% for x in category %}
+				<option value="{{ x.id }}">{{ x.name }}</option>
+			{% endfor %}
+		</select>
+        <input type="file" name="file"><br /><br />
+        <input type='submit' value='Create'>
+      </form>
+      </div>
+    </div>
+	
+</body>
+
+
+
+
+</html>
