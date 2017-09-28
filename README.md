@@ -22,32 +22,7 @@ Item Catalog is a RESTful web applicaiton using Flask with CRUD operations to a 
 
 ### API
 
-#### Base Url : http://localhost:5000/catalog/api/v1.0
-
-**Get Item by id**
-/item/{itemid(int)}/JSON
-
-returns:
-
-    id
-    name
-    price
-    description
-    dateadded
-    datemodified
-    picture
-    owner
-    categoryid
-    subcategoryid
-    itemcategoryid
-
-**Get Item by id**
-/category/{categoryid(int)}/JSON
-**/category/{categoryid(int)}/subcategorys/JSON**
-**/subcategory/{subcategoryid(int)}/JSON**
-**/subcategory/{subcategoryid(int)}/itemcategorys/JSON**
-**/itemcategory/{itemcategoryid(int)}/JSON**
-**/itemcategory/{itemcategoryid(int)}/items/JSON**
+https://github.com/dsenze/udacity-FSND-item_catalog/blob/master/api-doc.md
 
 ### Files in project
 
