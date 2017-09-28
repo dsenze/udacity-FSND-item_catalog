@@ -24,7 +24,8 @@ Item Catalog is a RESTful web applicaiton using Flask with CRUD operations to a 
 
 ### Files in project
 
-### Skills: 
+##### Tester.py:
+run this small program to test all endpoints
 
 
 
