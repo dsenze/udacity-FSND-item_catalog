@@ -24,7 +24,7 @@ Item Catalog is a RESTful web applicaiton using Flask with CRUD operations to a 
 
 ### Files in project
 
-##### Tester.py:
+#### Tester.py:
 run this program to test all endpoints and get a summary of broken URLs.
 
 ![Image of tester.py](https://github.com/dsenze/udacity-FSND-item_catalog/blob/master/static/images/blob/tester.PNG)
