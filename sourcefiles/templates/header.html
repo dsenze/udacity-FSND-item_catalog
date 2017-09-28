@@ -1,0 +1,13 @@
+<div class="jumbotron">
+    <div class="container text-center">
+        <h1>Udacity Fullstack</h1>
+        <p>Item Catalog - Project 3</p>
+    </div class="col-md-4">
+    <!--FLASHING MESSAGES -->
+    {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+    <span class="bg-info messages">
+        <strong>{{message}}</strong>
+    </span>
+    </li>
+    {% endfor %} {% endif %} {% endwith %}
+</div>
