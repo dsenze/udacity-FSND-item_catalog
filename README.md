@@ -2,9 +2,9 @@
 
 ### Overview
 
-Item Catalog is a RESTful web applicaiton using Flask with CRUD operations to a SQL Database with oauth authentication.
+Item Catalog is a RESTful web application using Flask with CRUD operations to a SQL Database with oauth authentication.
 
-*Python, OAUTH, CRUD, Flask Framework, Bootstrap, PSQL,grunt*
+*Python, OAUTH, CRUD, Flask Framework, Bootstrap, PSQL, grunt*
 
 ![Image of app](https://github.com/dsenze/udacity-FSND-item_catalog/blob/master/static/images/blob/startpage.PNG)
 
@@ -13,17 +13,23 @@ Item Catalog is a RESTful web applicaiton using Flask with CRUD operations to a 
 * Facebook user registration 
 * User permissions for ADD/CREATE/EDIT
     - public user can view all items including query public API.
-	- registred FB users can create and update own items.
+	- registered FB users can create and update own items.
 	- admins can modify all items including add new categorys/subcategorys/itemcategorys.
-* Registred users have possibility to request Admin Access in settings menu
-* Registred users have personalised 'my items view' to see all items that can be edited.
+* Registered users have possibility to request Admin Access in settings menu
+* Registered users have personalised 'my items view' to see all items that can be edited.
 * Upload and change pictures	
 * Public API
 
-### Prerequriements
-https://www.vagrantup.com/
-https://www.virtualbox.org/wiki/Downloads
+### PRE Requirements
+Vagrant, Virtualbox and Udacity vagrant VM preconfigured machine.
+
+- https://www.vagrantup.com/
+- https://www.virtualbox.org/wiki/Downloads
+- https://github.com/udacity/fullstack-nanodegree-vm
+
 ### API DOC
+
+Follow url to API Documentation:
 
 https://github.com/dsenze/udacity-FSND-item_catalog/blob/master/api-doc.md
 
