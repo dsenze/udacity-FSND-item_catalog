@@ -1,15 +1,57 @@
-<html>
-
-<head>
-</head>
-
+   {% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
 <body>
-
-    <h1>{{category.name}} - {{subcategory.name}} - {{itemcategory.name}} - {{item.name}}</h1>
-
-    <h3>{{item.name}} - {{item.id}} - {{item.picture}}</h3>
-    <img src="static/images/{{ item.picture }}" alt={{ item.name }} width="25" height="25" />
-	<a href='{{url_for('editItem',itemid = item.id)}}'> edit item</a>
-</body>
-
-</html>
+   <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+         <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+            </button>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar2">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+            </button
+            <a class="navbar-brand" href="#"></a>
+         </div>
+         <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+               <li><a href="/">Category</a></li>
+               <li><a href="{{url_for('showSubCategory',subcategoryid = category.id)}}">{{category.name}}</a></li>
+			   <li><a href="{{url_for('showItemCategory',itemcategoryid = subcategory.id)}}">{{subcategory.name}}</a></li>
+			   <li><a href="{{url_for('showItems',itemcategoryid = item.itemcategoryid)}}">{{itemcategory.name}}</a></li>
+			   <li class="active"><a href="{{request.path}}">{{item.name}}</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+               <fb:login-button scope="public_profile,email" onlogin="sendTokenToServer();">
+                  <a href='javascript:sendTokenToServer()'>Login with Facebook</a>
+               </fb:login-button>
+              </li>
+            </ul>
+         </div>
+      </div>
+   </nav>
+   <div class="container">
+   <div class="container top-margin">
+      <h1 class="display-1">{{item.name}}</h1>
+      <div class="col-md-6 item-description">
+	<img class="img-thumbnail img-responsive" <img src={{ url_for('static', filename = item.picture) }} alt="{{ item.name }}" />	
+</div>
+<div class="col-md-4 item-description">
+	<dl class="dl-horizontal">
+	<dd></dd>
+	<dd><h4><strong>{{item.name}}</strong></h4></dd>
+	<dt>Description:</dt>
+	<dd>{{item.description}}</dd>
+	<dt>Price:</dt>
+	<dd><strong>{{item.price}}</strong></dd>
+	<dt>Item Owner:</dt>
+	<dd>{{owner}}</dd>
+</div>
+      </div>
+   </div>
+   {% endblock %}
