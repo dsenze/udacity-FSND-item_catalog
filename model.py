@@ -109,7 +109,6 @@ class Items(Base):
     subcategoryid = Column(Integer, ForeignKey('subcategory.id'))
     itemcategoryid = Column(Integer, ForeignKey('itemcategory.id'))
 
-    
     @property
     def serialize(self):
         """Return object data in easily serializeable format"""
