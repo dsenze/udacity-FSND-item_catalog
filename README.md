@@ -4,6 +4,10 @@
 
 Item Catalog is a RESTful web applicaiton using Flask with CRUD operations to a SQL Database and oauth authentication.
 
+*Python, OAUTH, CRUD, Flask Framework, Bootstrap, PSQL*
+
+![Image of app](https://github.com/dsenze/udacity-FSND-item_catalog/blob/master/static/images/blob/startpage.PNG)
+
 ### Features:
 	* CRUD Operations
 	* Facebook user registration 
