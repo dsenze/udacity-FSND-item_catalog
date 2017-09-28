@@ -34,6 +34,7 @@ app = Flask(app.name, static_url_path='/static')
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 app.config['ALLOWED_EXTENSIONS'] = set(
     ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+app.config['TEMPLATES_AUTO_RELOAD']
 
 app.secret_key = 'super secret key'
 
@@ -298,7 +299,7 @@ def editCategory(categoryid):
 
 @app.route('/catalog/add/', methods=['GET', 'POST'])
 def addCategory():
-    if publicUser or verify_access("admin") is False:
+    if publicUser() or verify_access("admin") is False:
         flash("log in with your FB Account or add admin priv under settings")
         return redirect('/catalog/accessdenied')
     else:
@@ -324,11 +325,11 @@ def addCategory():
                 session.add(item)
                 session.commit()
                 moveFile(filename, 'category', item.id)
-                return redirect(url_for('showCategory'))
-            else:
-                return render_template(
-                    'admin_category_add.html',
-                    picture=login_session['picture'])
+            return redirect(url_for('showCategory'))
+        else:
+            return render_template(
+                'admin_category_add.html',
+                picture=login_session['picture'])
 
 
 @app.route('/catalog/<int:categoryid>/delete/', methods=['GET', 'POST'])
