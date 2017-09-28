@@ -2,7 +2,7 @@
 
 ### Overview
 
-Item Catalog is a RESTful web applicaiton using Flask with CRUD operations to a SQL Database and oauth authentication.
+Item Catalog is a RESTful web applicaiton using Flask with CRUD operations to a SQL Database with oauth authentication.
 
 *Python, OAUTH, CRUD, Flask Framework, Bootstrap, PSQL*
 
