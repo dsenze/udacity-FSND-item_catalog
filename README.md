@@ -26,23 +26,23 @@ https://github.com/dsenze/udacity-FSND-item_catalog/blob/master/api-doc.md
 
 ### Files in project
 
-### model.py
+###### model.py
 contains the database model for the application
-### add_data.py
+###### add_data.py
 adds some dummy data to database.
-### application.py
+###### application.py
 start the application.
-### UPLOAD folder 
+###### UPLOAD /FOLDER
 used to temporary store uploaded files, app crash if this folders does not exist.
-### Templates
+###### Templates /FOLDER
 contains all html templates for the project
-### static
+###### static /FOLDER
 contains compressed CSS and Images
-### fb_clients_secrets.json
+###### fb_clients_secrets.json
 contains appid/secret to your application in facebook developer account (Must be updated with your Application, see install instructions)
-### sourcefiles
+###### sourcefiles /FOLDER
 can be ignored. used for cleanup operations with grunt.
-### Tester.py:
+###### Tester.py:
 run this program to test all endpoints and get a summary of broken URLs.
 
 ![Image of tester.py](https://github.com/dsenze/udacity-FSND-item_catalog/blob/master/static/images/blob/tester.PNG)
