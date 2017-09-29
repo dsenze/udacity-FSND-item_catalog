@@ -48,8 +48,6 @@ https://github.com/dsenze/udacity-FSND-item_catalog/blob/master/api-doc.md
     - contains compressed CSS and Images
 * fb_clients_secrets.json
     - contains appid/secret to your application in facebook developer account (Must be updated with your Application, see install instructions)
-* sourcefiles
-    - can be ignored. used for cleanup operations with grunt.
 * Tester.py
     - run this program to test all endpoints and get a summary of broken URLs.
 
