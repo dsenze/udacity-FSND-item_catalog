@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import os
 from flask import (
     Flask,
@@ -24,8 +25,6 @@ import httplib2
 from flask import session as login_session
 from flask import make_response
 
-from flask.ext.httpauth import HTTPBasicAuth
-auth = HTTPBasicAuth()
 
 app = Flask(__name__)
 # This is the path for image files.
