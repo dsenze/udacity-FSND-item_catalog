@@ -34,8 +34,12 @@ app.config['UPLOAD_FOLDER'] = 'uploads/'
 app.config['ALLOWED_EXTENSIONS'] = set(
     ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 app.config['TEMPLATES_AUTO_RELOAD']
-
 app.secret_key = 'super secret key'
+
+# If project is deployed in Apache, fullname url to file is needed.
+# https://stackoverflow.com/questions/44742566/wsgi-cant-find-file-in-same-directory-in-app
+PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
+json_url = os.path.join(PROJECT_ROOT, 'fb_client_secrets.json')
 
 engine = create_engine('sqlite:///items.db')
 Base.metadata.bind = engine
@@ -143,10 +147,10 @@ def fbconnect():
         response.headers['Content-Type'] = 'application/json'
         return response
     access_token = request.data
-    app_id = json.loads(open('fb_client_secrets.json', 'r').read())[
+    app_id = json.loads(open(json_url, 'r').read())[
         'web']['app_id']
     app_secret = json.loads(
-        open('fb_client_secrets.json', 'r').read())['web']['app_secret']
+        open(json_url, 'r').read())['web']['app_secret']
     url = (
         'https://graph.facebook.com/oauth/access_token?grant_type=fb_exch' +
         'ange_token&client_id=%s&client_secret=%s&fb_exchange_token=%s' % (
