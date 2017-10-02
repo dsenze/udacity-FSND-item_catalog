@@ -14,10 +14,10 @@ session = DBSession()
 
 
 # Create user endpoint tester for future endpoint tests tester.py
-User1 = User(name="endpointtester", username="endpointtester@outlook.com",
-             picture="", role="admin")
-session.add(User1)
-session.commit()
+# User1 = User(name="endpointtester", username="endpointtester@outlook.com",
+#             picture="", role="admin")
+# session.add(User1)
+# session.commit()
 
 # create Category
 category = Category(
