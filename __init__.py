@@ -33,13 +33,13 @@ json_url = os.path.join(PROJECT_ROOT, 'fb_client_secrets.json')
 
 # This is the path for image files.
 app = Flask(app.name, static_url_path='/static')
-app = Flask(app.name, template_folder='/var/www/itemcatalog/itemcatalog/templates')
+app = Flask(app.name,
+            template_folder='/var/www/itemcatalog/itemcatalog/templates')
 # This is the path to the upload folder directory
 app.config['UPLOAD_FOLDER'] = PROJECT_ROOT+'uploads/'
 app.config['ALLOWED_EXTENSIONS'] = set(
     ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 app.secret_key = 'super secret key'
-
 
 
 engine = create_engine('postgresql://catalog:password@localhost/catalog')
@@ -348,8 +348,8 @@ def deleteCategory(categoryid):
             session.commit()
             try:
                 # delete picture if it exist.
-                file = '/var/www/itemcatalog/itemcatalog/static/images/category/' + \
-                    str(categoryid) + '/'
+                file = '/var/www/itemcatalog/itemcatalog/static/' +
+                'images/category/ + str(categoryid) + '/'
                 shutil.rmtree(file)
             except Exception:
                 print 'delete file error, file was not found [' + file + ']'
@@ -453,8 +453,8 @@ def deleteSubCategory(subcategoryid):
             session.commit()
             try:
                 # delete picture if it exist.
-                file = '/var/www/itemcatalog/itemcatalog/static/images/subcategory/' + \
-                    str(subcategoryid) + '/'
+                file = '/var/www/itemcatalog/itemcatalog/static/'+
+                'images/subcategory/' + str(subcategoryid) + '/'
                 shutil.rmtree(file)
             except Exception:
                 print 'delete file error, file was not found [' + file + ']'
@@ -681,8 +681,8 @@ def deleteItemCategory(itemcategoryid):
             session.commit()
             try:
                 # delete picture if it exist.
-                file = '/var/www/itemcatalog/itemcatalog/static/images/itemcategory/' + \
-                    str(itemcategoryid) + '/'
+                file = '/var/www/itemcatalog/itemcatalog/' +
+                'static/images/itemcategory/' + str(itemcategoryid) + '/'
                 shutil.rmtree(file)
             except Exception:
                 print 'delete file error, file was not found [' + file + ']'
@@ -831,7 +831,7 @@ def editItem(itemid):
             id=editedItem.categoryid).first()
         subcategory = session.query(SubCategory).filter_by(
             id=editedItem.subcategoryid).first()
-            
+
         if request.method == 'POST':
             if request.form['name']:
                 editedItem.name = request.form['name']
@@ -869,7 +869,8 @@ def editItem(itemid):
                 user = getUserInfo(userid)
             except BaseException:
                 userid = None
-            if userid is not None and editedItem.owner == userid or user.role == 'admin':
+            if userid is not None and (
+                    editedItem.owner == userid or user.role == 'admin'):
                 return render_template(
                     'user_item_edit.html',
                     item=editedItem,
@@ -888,7 +889,8 @@ def deleteItem(itemid):
         user = getUserInfo(userid)
     except BaseException:
         userid = None
-    if publicUser() or itemToDelete.owner is not userid and user.role != 'admin':
+    if publicUser() or (
+            itemToDelete.owner is not userid and user.role != 'admin'):
         flash("log in with your FB Account or add admin priv under settings")
         return redirect('/catalog/accessdenied')
     else:
@@ -903,8 +905,8 @@ def deleteItem(itemid):
             session.commit()
             try:
                 # delete picture if it exist.
-                file = '/var/www/itemcatalog/itemcatalog/static/images/item/' + \
-                    str(itemid) + '/'
+                file = '/var/www/itemcatalog/itemcatalog/static' +
+                '/images/item/' + str(itemid) + '/'
                 shutil.rmtree(file)
             except Exception:
                 print 'delete file error, file was not found [' + file + ']'
@@ -1002,7 +1004,6 @@ def showItems(itemcategoryid):
             items=items,
             STATE=state)
 
-
 ''' API V1.0 '''
 '''
     JSON for item Endpoints
@@ -1011,9 +1012,14 @@ def showItems(itemcategoryid):
 
 @app.route('/catalog/api/v1.0/item/<int:itemid>/JSON')
 def itemJSON(itemid):
-    item = session.query(Items).filter_by(id=itemid).one()
-    return jsonify(Item=item.serialize)
-
+    try:
+        item = session.query(Items).filter_by(id=itemid).one()
+        return jsonify(Item=item.serialize)
+    except:
+        error = [
+            {'error:': 'no item found'}
+        ]
+        return jsonify(results=error)
 
 '''
     JSON for itemcategory Endpoints
@@ -1022,16 +1028,28 @@ def itemJSON(itemid):
 
 @app.route('/catalog/api/v1.0/itemcategory/<int:itemcategoryid>/JSON')
 def itemcategoryJSON(itemcategoryid):
-    itemcategory = session.query(
-        ItemCategory).filter_by(id=itemcategoryid).one()
-    return jsonify(ItemCategory=itemcategory.serialize)
+    try:
+        itemcategory = session.query(
+            ItemCategory).filter_by(id=itemcategoryid).one()
+        return jsonify(ItemCategory=itemcategory.serialize)
+    except:
+        error = [
+            {'error:': 'no item found'}
+        ]
+        return jsonify(results=error)
 
 
 @app.route('/catalog/api/v1.0/itemcategory/<int:itemcategoryid>/items/JSON')
 def returnItemsJSON(itemcategoryid):
-    itemcategory = session.query(Items).filter_by(
-        itemcategoryid=itemcategoryid).all()
-    return jsonify(ItemCategorys=[i.serialize for i in itemcategory])
+    try:
+        itemcategory = session.query(Items).filter_by(
+            itemcategoryid=itemcategoryid).all()
+        return jsonify(ItemCategorys=[i.serialize for i in itemcategory])
+    except:
+        error = [
+            {'error:': 'no item found'}
+        ]
+        return jsonify(results=error)
 
 
 '''
@@ -1048,15 +1066,21 @@ def categoryJSON(categoryid):
         error = [
             {'error:': 'no item found'}
         ]
-        return jsonify(results = error)
+        return jsonify(results=error)
 
 
 @app.route('/catalog/api/v1.0/category/<int:categoryid>/subcategorys/JSON')
 def returnSubCategorysJSON(categoryid):
-    category = session.query(SubCategory).filter_by(
-        categoryid=categoryid).all()
-    return jsonify(Categorys=[i.serialize for i in category])
+    try:
+        category = session.query(SubCategory).filter_by(
+            categoryid=categoryid).all()
+        return jsonify(Categorys=[i.serialize for i in category])
 
+    except:
+        error = [
+            {'error:': 'no item found'}
+        ]
+        return jsonify(results=error)
 
 '''
     JSON for subcategory Endpoints
@@ -1065,17 +1089,32 @@ def returnSubCategorysJSON(categoryid):
 
 @app.route('/catalog/api/v1.0/subcategory/<int:subcategoryid>/JSON')
 def subcategoryJSON(subcategoryid):
-    subcategory = session.query(SubCategory).filter_by(id=subcategoryid).one()
-    return jsonify(SubCategory=subcategory.serialize)
+    try:
+        subcategory = session.query(SubCategory).filter_by(
+            id=subcategoryid).one()
+        return jsonify(SubCategory=subcategory.serialize)
+
+    except:
+        error = [
+            {'error:': 'no item found'}
+        ]
+        return jsonify(results=error)
 
 
 @app.route(
     '/catalog/api/v1.0/subcategory/<int:subcategoryid>/itemcategorys/JSON'
 )
 def returnItemCategorysJSON(subcategoryid):
-    itemcategory = session.query(ItemCategory).filter_by(
-        subcategoryid=subcategoryid).all()
-    return jsonify(itemCategorys=[i.serialize for i in itemcategory])
+    try:
+        itemcategory = session.query(ItemCategory).filter_by(
+            subcategoryid=subcategoryid).all()
+        return jsonify(itemCategorys=[i.serialize for i in itemcategory])
+
+    except:
+        error = [
+            {'error:': 'no item found'}
+        ]
+        return jsonify(results=error)
 
 
 if __name__ == '__main__':
