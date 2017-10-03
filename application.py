@@ -81,7 +81,8 @@ def createUser(login_session):
         role="user")
     session.add(newUser)
     session.commit()
-    return newUser
+    # return newUser !REMOVED
+    # Caused app to crash when creating first user in db.
 
 
 def getUserInfo(user_id):
@@ -205,8 +206,9 @@ def fbconnect():
     user_id = getUserID(login_session['email'])
     if not user_id:
         user_id = createUser(login_session)
-    # Save new user_id to session.
-    login_session['user_id'] = user_id
+    # login_session['user_id'] = user_id. REMOVED!
+    # Caused app to crash when creating first user in db
+    # login_session['user_id' not necessary in project.
     flash("Now logged in as %s" % login_session['name'])
     return 'logged in'
 
